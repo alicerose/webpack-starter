@@ -1,8 +1,6 @@
 {
-  "name": "typescript-practice",
+  "name": "webpack-starter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "private": true,
   "scripts": {
     "dev": "webpack server",
@@ -13,14 +11,12 @@
     "eslint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
     "lint": "npm-run-all eslint check-types",
-    "lint:fix": "npm-run-all eslint:fix check-types format",
-    "precommit": "npm run lint:fix"
+    "lint:fix": "npm-run-all eslint:fix check-types format"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "autoprefixer": "^10.4.0",
     "css-loader": "^6.5.1",
     "ejs": "^3.1.6",
     "ejs-plain-loader": "^1.4.1",
@@ -33,7 +29,10 @@
     "html-loader": "^3.0.1",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
     "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.1",
+    "postcss-loader": "^6.2.0",
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0",
     "sass": "^1.43.4",
@@ -45,13 +44,11 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "precommit"
-    }
-  },
   "dependencies": {
     "highlight.js": "^11.3.1",
     "scss-reset": "^1.2.2"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "lint"
   }
 }
