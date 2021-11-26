@@ -15,10 +15,10 @@ module.exports = {
     bundleImages: true,
 
     // 一定サイズ以下のファイルはバンドルする場合
-    bundleSizeLimit: 25 * 100,
+    bundleSizeLimit: 3 * 1024,
 
     // 特定の階層に書き出す場合
-    assetName: './assets/images/[name]-[contenthash].[ext]',
+    assetName: './assets/images/[name].[contenthash][ext]',
   },
   html: {
     hash: true,

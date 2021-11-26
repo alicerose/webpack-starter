@@ -16,17 +16,16 @@ const isProduction = process.env.NODE_ENV === 'production';
  */
 const prepareImageLoader = (config) => {
   const loader = {
-    type: config.mode ? 'asset' : 'asset/resource',
+    type: config.bundleImages ? 'asset' : 'asset/resource',
+    generator: {
+      filename: config.assetName,
+    },
   };
-  if (config.mode) {
+  if (config.bundleImages) {
     loader.parser = {
       dataUrlCondition: {
         maxSize: config.bundleSizeLimit,
       },
-    };
-  } else {
-    loader.generator = {
-      filename: config.assetName,
     };
   }
 
@@ -111,7 +110,7 @@ const app = {
 
   output: {
     filename: 'assets/js/bundle.js',
-    path: path.join(__dirname, configs.directories.dist)
+    path: path.join(__dirname, configs.directories.dist),
   },
 
   devServer: {
