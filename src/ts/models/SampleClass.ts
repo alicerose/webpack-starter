@@ -1,8 +1,6 @@
-interface SampleClassType {
-  title: string;
-}
+import SampleInterface from '../interfaces/SampleInterface';
 
-export default class SampleClass implements SampleClassType {
+export default class SampleClass implements SampleInterface {
   title: string;
 
   constructor(title: string) {
