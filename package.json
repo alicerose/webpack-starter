@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack server",
-    "build": "npm run clean && webpack --mode production",
+    "build": "npm run clean && NODE_ENV=production webpack",
     "clean": "rimraf dist/*",
     "check-types": "tsc --noEmit",
     "eslint": "eslint src/**/*.ts",

@@ -10,6 +10,7 @@ const terserPlugin = require('terser-webpack-plugin');
 const configs = require('./project.config');
 
 const isProduction = process.env.NODE_ENV === 'production';
+console.log('Build Environment:', process.env.NODE_ENV);
 
 /**
  * 画像処理の設定準備
