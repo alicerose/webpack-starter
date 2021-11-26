@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const flexBugFixes = require('postcss-flexbugs-fixes');
+
 module.exports = {
   directories: {
     src: 'src',
@@ -9,7 +12,7 @@ module.exports = {
     port: 3000,
   },
   scss: {
-    plugins: [['autoprefixer', { grid: true }]],
+    plugins: [['autoprefixer', { grid: true }],flexBugFixes()],
   },
   images: {
     bundleImages: true,

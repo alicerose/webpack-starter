@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const globule = require('globule');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const terserPlugin = require('terser-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const configs = require('./project.config');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -122,6 +124,17 @@ const app = {
   },
 
   plugins: [],
+
+  optimization: {
+    minimizer: [
+      new terserPlugin({
+        parallel: true,
+        terserOptions: {
+          compress: { drop_console: isProduction },
+        },
+      }),
+    ],
+  },
 };
 
 /**
