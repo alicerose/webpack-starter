@@ -3,9 +3,36 @@ const path = require('path');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const globule = require('globule');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const configs = require('./project.config');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+/**
+ * 画像処理の設定準備
+ * @param config
+ * @return {{type: (string)}}
+ */
+const prepareImageLoader = (config) => {
+  const loader = {
+    type: config.mode ? 'asset' : 'asset/resource',
+  };
+  if (config.mode) {
+    loader.parser = {
+      dataUrlCondition: {
+        maxSize: config.bundleSizeLimit,
+      },
+    };
+  } else {
+    loader.generator = {
+      filename: config.assetName,
+    };
+  }
+
+  return loader;
+};
+const imageLoaderBehavior = prepareImageLoader(configs.images);
 
 const app = {
   mode: isProduction ? 'production' : 'development',
@@ -29,7 +56,7 @@ const app = {
       // images
       {
         test: /\.(jpe?g|png|gif|svg|webp)$/,
-        ...configs.images,
+        ...imageLoaderBehavior,
       },
 
       // ejs
@@ -90,13 +117,29 @@ const app = {
     ...configs.server,
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: `${configs.directories.src}/ejs/index.ejs`,
-      ...configs.html,
-    }),
-  ],
+  plugins: [],
 };
+
+/**
+ * EJSの一括処理
+ */
+const addEjsTemplates = () => {
+  const templates = globule.find('./src/ejs/**/*.ejs', {
+    ignore: ['./src/ejs/**/_*.ejs'],
+  });
+  templates.forEach((template) => {
+    const fileName = template
+      .replace('./src/ejs/', '')
+      .replace('.ejs', '.html');
+    app.plugins.push(
+      new HtmlWebpackPlugin({
+        filename: `${fileName}`,
+        template: template,
+        ...configs.html,
+      })
+    );
+  });
+};
+addEjsTemplates();
 
 module.exports = app;

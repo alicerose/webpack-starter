@@ -11,19 +11,13 @@ module.exports = {
     plugins: [['autoprefixer', { grid: true }]],
   },
   images: {
-    // 特定のディレクトリに書き出す場合
-    // type: 'asset/resource',
-    // generator: {
-    //   filename: './assets/images/[name]-[contenthash].[ext]',
-    // },
+    bundleImages: true,
 
     // 一定サイズ以下のファイルはバンドルする場合
-    type: 'asset',
-    parser: {
-      dataUrlCondition: {
-        maxSize: 25 * 100,
-      },
-    },
+    bundleSizeLimit: 25 * 100,
+
+    // 特定の階層に書き出す場合
+    assetName: './assets/images/[name]-[contenthash].[ext]',
   },
   html: {
     hash: true,
