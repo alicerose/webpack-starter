@@ -109,6 +109,11 @@ const app = {
     modules: ['node_modules'],
   },
 
+  output: {
+    filename: 'assets/js/bundle.js',
+    path: path.join(__dirname, configs.directories.dist)
+  },
+
   devServer: {
     watchFiles: [`${configs.directories.src}/ejs/*.ejs`],
     static: {
@@ -124,12 +129,12 @@ const app = {
  * EJSの一括処理
  */
 const addEjsTemplates = () => {
-  const templates = globule.find('./src/ejs/**/*.ejs', {
-    ignore: ['./src/ejs/**/_*.ejs'],
+  const templates = globule.find(`./${configs.directories.src}/ejs/**/*.ejs`, {
+    ignore: [`./${configs.directories.src}/ejs/**/_*.ejs`],
   });
   templates.forEach((template) => {
     const fileName = template
-      .replace('./src/ejs/', '')
+      .replace(`./${configs.directories.src}/ejs/`, '')
       .replace('.ejs', '.html');
     app.plugins.push(
       new HtmlWebpackPlugin({

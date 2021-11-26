@@ -1,6 +1,7 @@
 module.exports = {
   directories: {
     src: 'src',
+    dist: 'dist',
   },
   server: {
     compress: true,
