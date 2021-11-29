@@ -1,3 +1,3 @@
 export default interface SampleInterface {
-  title: string;
+  [key: string]: number;
 }

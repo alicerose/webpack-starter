@@ -1,9 +1,9 @@
 import SampleInterface from '../interfaces/SampleInterface';
 
 export default class SampleClass implements SampleInterface {
-  title: string;
+  [key: string]: number;
 
-  constructor(title: string) {
-    this.title = title;
+  constructor(num1: number) {
+    this.num1 = num1;
   }
 }
