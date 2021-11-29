@@ -7,3 +7,5 @@ console.log(cls);
 
 const ext = new ExtendedClass(456);
 console.log(ext);
+
+console.log(process.env.API_HOST);

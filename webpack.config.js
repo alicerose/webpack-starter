@@ -1,14 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint @typescript-eslint/no-var-requires : 0 */
 const path = require('path');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const globule = require('globule');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const terserPlugin = require('terser-webpack-plugin');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TerserPlugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
 
+const environment = process.env.NODE_ENV || 'local';
+console.log('Target Environment:', environment);
 const isProduction = process.env.NODE_ENV === 'production';
 console.log('Build Environment:', process.env.NODE_ENV);
 
@@ -124,11 +123,15 @@ const app = {
     ...configs.server,
   },
 
-  plugins: [],
+  plugins: [
+    new Dotenv({
+      path: path.resolve(__dirname, `.env.${environment}`),
+    }),
+  ],
 
   optimization: {
     minimizer: [
-      new terserPlugin({
+      new TerserPlugin({
         parallel: true,
         terserOptions: {
           compress: { drop_console: isProduction },
