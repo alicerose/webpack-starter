@@ -9,7 +9,7 @@ const configs = require('./project.config');
 const environment = process.env.NODE_ENV || 'local';
 console.log('Target Environment:', environment);
 const isProduction = process.env.NODE_ENV === 'production';
-console.log('Build Environment:', process.env.NODE_ENV);
+console.log('Build Environment:', process.env.NODE_ENV ?? 'local');
 
 /**
  * 画像処理の設定準備
