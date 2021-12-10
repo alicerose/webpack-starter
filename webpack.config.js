@@ -81,7 +81,7 @@ const app = {
           {
             loader: 'css-loader',
             options: {
-              url: false,
+              url: true,
               sourceMap: !isProduction,
               importLoaders: 2,
             },
