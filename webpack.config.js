@@ -5,6 +5,7 @@ const globule = require('globule');
 const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const environment = process.env.NODE_ENV || 'local';
 console.log('Target Environment:', environment);
@@ -78,7 +79,8 @@ const app = {
       {
         test: /\.scss/,
         use: [
-          'style-loader',
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -127,6 +129,10 @@ const app = {
   plugins: [
     new Dotenv({
       path: path.resolve(__dirname, `.env.${environment}`),
+    }),
+    new MiniCssExtractPlugin({
+      // 抽出する CSS のファイル名
+      filename: `assets/css/[name].css`,
     }),
   ],
 
