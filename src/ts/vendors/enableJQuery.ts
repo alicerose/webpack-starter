@@ -4,7 +4,7 @@ interface Window {
 declare let window: Window;
 
 export const enableJQuery = {
-  init: () => {
+  init : () => {
     /**
      * ファイル外からjQueryを参照出来るようにする
      * @type {function(*=): *}
