@@ -109,6 +109,9 @@ const app = {
   },
 
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
     extensions: ['.ts', '.js'],
     modules: ['node_modules'],
   },
