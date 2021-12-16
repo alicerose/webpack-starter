@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const environment = process.env.NODE_ENV || 'local';
 console.log('Target Environment:', environment);
 const isProduction = process.env.NODE_ENV === 'production';
-console.log('Build Environment:', process.env.NODE_ENV ?? 'local');
+console.log('Build Environment :', process.env.NODE_ENV ?? 'local');
 
 /**
  * 画像処理の設定準備
@@ -40,7 +40,7 @@ const app = {
   mode: isProduction ? 'production' : 'development',
 
   entry: {
-    bundle: `./${configs.directories.src}/ts/index.ts`,
+    app: `./${configs.directories.src}/ts/index.ts`,
   },
 
   target: ['web', 'es5'],
@@ -117,7 +117,7 @@ const app = {
   },
 
   output: {
-    filename: 'assets/js/bundle.js',
+    filename: 'assets/js/[name].bundle.js',
     path: path.join(__dirname, configs.directories.dist),
   },
 
@@ -148,6 +148,17 @@ const app = {
         },
       }),
     ],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          // node_modules配下はvendorとしてbundle
+          test: /node_modules/,
+          name: 'vendor',
+          chunks: 'initial',
+          enforce: true
+        }
+      }
+    }
   },
 };
 
