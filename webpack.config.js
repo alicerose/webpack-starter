@@ -38,8 +38,6 @@ const imageLoaderBehavior = prepareImageLoader(configs.images);
 const app = {
   mode: isProduction ? 'production' : 'development',
 
-  devtool: 'source-map',
-
   entry: {
     bundle: `./${configs.directories.src}/ts/index.ts`,
   },
@@ -166,4 +164,7 @@ const addEjsTemplates = () => {
 };
 addEjsTemplates();
 
-module.exports = app;
+module.exports = (env, argv) => {
+  if (argv.mode !== 'production' && !isProduction) app.devtool = 'source-map';
+  return app;
+};
