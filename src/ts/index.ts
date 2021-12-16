@@ -1,4 +1,5 @@
-import '../scss/common.scss';
+import '@/scss/common.scss';
+// import 'core-js';
 import SampleClass from './models/SampleClass';
 import ExtendedClass from './models/ExtendedClass';
 import { enableJQuery } from './vendors/enableJQuery';
