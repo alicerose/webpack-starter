@@ -44,7 +44,7 @@ const app = {
     bundle: `./${configs.directories.src}/ts/index.ts`,
   },
 
-  target: isProduction ? ['web', 'es5'] : 'web',
+  target: ['web', 'es5'],
 
   module: {
     rules: [
