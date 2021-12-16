@@ -66,6 +66,9 @@ const app = {
         use: [
           {
             loader: 'html-loader',
+            options: {
+              minimize: configs.html.minify,
+            },
           },
           {
             loader: 'ejs-plain-loader',
