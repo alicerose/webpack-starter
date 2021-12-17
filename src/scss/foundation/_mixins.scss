@@ -1,6 +1,7 @@
 // --------------------------------
 // 独自mixins
 // --------------------------------
+@use 'variables' as var;
 
 // メディアクエリ
 // 第一引数省略時
@@ -14,7 +15,7 @@
 //   @include mq {}           // @media screen and (max-width: 768px) {}
 //   @include mq(min) {}      // @media screen and (min-width: 769px) {}
 //   @include mq(min, 1000){} // @media screen and (min-width: 1001px) {}
-@mixin mq($method: max, $width: $breakpoint) {
+@mixin mq($method: max, $width: var.$breakpoint) {
   @if ($method == min) {
     $width: $width + 1;
   }
