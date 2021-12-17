@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const environment = process.env.NODE_ENV || 'local';
@@ -140,6 +141,11 @@ const app = {
     // new BundleAnalyzerPlugin({
     //   analyzerPort: 'auto',
     // }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public', to: path.join(__dirname, configs.directories.dist), },
+      ],
+    }),
   ],
 
   optimization: {
