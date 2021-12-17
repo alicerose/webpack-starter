@@ -5,11 +5,12 @@ const globule = require('globule');
 const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const environment = process.env.NODE_ENV || 'local';
-console.log('Target Environment:', environment);
 const isProduction = process.env.NODE_ENV === 'production';
-console.log('Build Environment:', process.env.NODE_ENV ?? 'local');
+console.log('Build Environment :', process.env.NODE_ENV ?? 'local');
 
 /**
  * 画像処理の設定準備
@@ -18,7 +19,7 @@ console.log('Build Environment:', process.env.NODE_ENV ?? 'local');
  */
 const prepareImageLoader = (config) => {
   const loader = {
-    type: config.bundleImages ? 'asset' : 'asset/resource',
+    type     : config.bundleImages ? 'asset' : 'asset/resource',
     generator: {
       filename: config.assetName,
     },
@@ -36,22 +37,18 @@ const prepareImageLoader = (config) => {
 const imageLoaderBehavior = prepareImageLoader(configs.images);
 
 const app = {
-  mode: isProduction ? 'production' : 'development',
-
-  devtool: 'source-map',
-
   entry: {
-    bundle: `./${configs.directories.src}/ts/index.ts`,
+    app: `./${configs.directories.src}/ts/index.ts`,
   },
 
-  target: isProduction ? ['web', 'es5'] : 'web',
+  target: ['web', 'es5'],
 
   module: {
     rules: [
       // ts
       {
         test: /\.ts$/,
-        use: 'ts-loader',
+        use : 'ts-loader',
       },
 
       // images
@@ -63,9 +60,12 @@ const app = {
       // ejs
       {
         test: /\.ejs$/i,
-        use: [
+        use : [
           {
-            loader: 'html-loader',
+            loader : 'html-loader',
+            options: {
+              minimize: configs.html.minify,
+            },
           },
           {
             loader: 'ejs-plain-loader',
@@ -76,18 +76,19 @@ const app = {
       // scss
       {
         test: /\.scss/,
-        use: [
-          'style-loader',
+        use : [
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader : 'css-loader',
             options: {
-              url: true,
-              sourceMap: !isProduction,
+              url          : true,
+              sourceMap    : !isProduction,
               importLoaders: 2,
             },
           },
           {
-            loader: 'postcss-loader',
+            loader : 'postcss-loader',
             options: {
               postcssOptions: {
                 ...configs.scss.plugins,
@@ -95,7 +96,7 @@ const app = {
             },
           },
           {
-            loader: 'sass-loader',
+            loader : 'sass-loader',
             options: {
               sourceMap: !isProduction,
             },
@@ -106,18 +107,21 @@ const app = {
   },
 
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
     extensions: ['.ts', '.js'],
-    modules: ['node_modules'],
+    modules   : ['node_modules'],
   },
 
   output: {
-    filename: 'assets/js/bundle.js',
-    path: path.join(__dirname, configs.directories.dist),
+    filename: 'assets/js/[name].bundle.js',
+    path    : path.join(__dirname, configs.directories.dist),
   },
 
   devServer: {
     watchFiles: [`${configs.directories.src}/ejs/*.ejs`],
-    static: {
+    static    : {
       directory: path.join(__dirname, 'public'),
     },
     ...configs.server,
@@ -125,19 +129,39 @@ const app = {
 
   plugins: [
     new Dotenv({
-      path: path.resolve(__dirname, `.env.${environment}`),
+      path    : path.resolve(__dirname, `.env.${environment}`),
+      safe    : false,
+      defaults: false,
     }),
+    new MiniCssExtractPlugin({
+      // 抽出する CSS のファイル名
+      filename: 'assets/css/[name].css',
+    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerPort: 'auto',
+    // }),
   ],
 
   optimization: {
     minimizer: [
       new TerserPlugin({
-        parallel: true,
+        parallel     : true,
         terserOptions: {
           compress: { drop_console: isProduction },
         },
       }),
     ],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          // node_modules配下はvendorとしてbundle
+          test   : /node_modules/,
+          name   : 'vendor',
+          chunks : 'initial',
+          enforce: true
+        }
+      }
+    }
   },
 };
 
@@ -163,4 +187,8 @@ const addEjsTemplates = () => {
 };
 addEjsTemplates();
 
-module.exports = app;
+module.exports = (env, argv) => {
+  app.mode = argv.mode ?? 'development';
+  if (argv.mode !== 'production' && !isProduction) app.devtool = 'source-map';
+  return app;
+};
