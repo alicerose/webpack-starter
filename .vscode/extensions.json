@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "digitalbrainstem.javascript-ejs-support",
+        "dbaeumer.vscode-eslint",
+        "mrmlnc.vscode-scss"
+    ]
+}
