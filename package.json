@@ -12,7 +12,8 @@
     "eslint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
     "lint": "npm-run-all eslint check-types",
-    "lint:fix": "npm-run-all eslint:fix check-types format"
+    "lint:fix": "npm-run-all eslint:fix check-types format",
+    "convert-webp": "sh bin/convertWebP.sh"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
