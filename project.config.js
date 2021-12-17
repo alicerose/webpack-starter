@@ -3,18 +3,19 @@ const flexBugFixes = require('postcss-flexbugs-fixes');
 
 module.exports = {
   directories: {
-    src: 'src',
+    src : 'src',
     dist: 'dist',
   },
   server: {
     compress: true,
-    open: true,
-    port: 3000,
+    open    : true,
+    port    : 3000,
   },
   scss: {
     plugins: [['autoprefixer', { grid: true }],flexBugFixes()],
   },
   images: {
+    // 画像の
     bundleImages: true,
 
     // 一定サイズ以下のファイルはバンドルする場合
@@ -24,7 +25,9 @@ module.exports = {
     assetName: './assets/images/[name].[contenthash][ext]',
   },
   html: {
-    hash: true,
+    // ハッシュ化するか
+    hash  : true,
+    // htmlを圧縮して出力するか
     minify: false,
   },
 };
