@@ -141,11 +141,6 @@ const app = {
     // new BundleAnalyzerPlugin({
     //   analyzerPort: 'auto',
     // }),
-    new CopyPlugin({
-      patterns: [
-        { from: 'public', to: path.join(__dirname, configs.directories.dist), },
-      ],
-    }),
   ],
 
   optimization: {
@@ -196,5 +191,15 @@ addEjsTemplates();
 module.exports = (env, argv) => {
   app.mode = argv.mode ?? 'development';
   if (argv.mode !== 'production' && !isProduction) app.devtool = 'source-map';
+
+  const patterns = [
+    { from: 'public/common', to: path.join(__dirname, configs.directories.dist), },
+    { from: `public/${argv.mode ?? 'development'}`, to: path.join(__dirname, configs.directories.dist), },
+  ];
+
+  app.plugins.push(
+    new CopyPlugin({ patterns }),
+  );
+
   return app;
 };
