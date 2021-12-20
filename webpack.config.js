@@ -6,6 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const environment = process.env.NODE_ENV || 'local';
@@ -190,5 +191,15 @@ addEjsTemplates();
 module.exports = (env, argv) => {
   app.mode = argv.mode ?? 'development';
   if (argv.mode !== 'production' && !isProduction) app.devtool = 'source-map';
+
+  const patterns = [
+    { from: 'public/common', to: path.join(__dirname, configs.directories.dist), },
+    { from: `public/${argv.mode ?? 'development'}`, to: path.join(__dirname, configs.directories.dist), },
+  ];
+
+  app.plugins.push(
+    new CopyPlugin({ patterns }),
+  );
+
   return app;
 };
