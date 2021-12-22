@@ -121,7 +121,7 @@ const app = {
   },
 
   devServer: {
-    watchFiles: [`${configs.directories.src}/ejs/*.ejs`],
+    watchFiles: [`${configs.directories.src}/ejs/**/*.ejs`, `${configs.directories.src}/ejs/**/_*.ejs`],
     static    : {
       directory: path.join(__dirname, 'public'),
     },

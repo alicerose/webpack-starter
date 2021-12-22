@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack server",
+    "dev": "webpack serve",
     "build:develop": "npm run clean && NODE_ENV=development webpack",
     "build:production": "npm run clean && NODE_ENV=production webpack --mode=production",
     "clean": "rimraf dist/",
