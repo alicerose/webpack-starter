@@ -141,6 +141,11 @@ const app = {
     // new BundleAnalyzerPlugin({
     //   analyzerPort: 'auto',
     // }),
+    new webpack.ProvidePlugin({
+      '$'            : 'jquery',
+      'jQuery'       : 'jquery',
+      'window.jQuery': 'jquery',
+    }),
   ],
 
   optimization: {

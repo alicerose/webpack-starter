@@ -20,7 +20,8 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "node_modules/@types/jquery/JQuery.d.ts"
   ],
   "exclude": [
     "dist",
