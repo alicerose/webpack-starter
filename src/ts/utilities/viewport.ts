@@ -52,6 +52,7 @@ export default class Viewport {
    * @private
    */
   private screenSizeModified() {
+    console.log('[Viewport]', this.getScreenSize());
     this.vhFix();
   }
 
@@ -100,14 +101,14 @@ export default class Viewport {
   /**
    * 現在画面幅がPCかどうかのGetter
    */
-  public isPc() {
+  get isPc():boolean {
     return this.desktop;
   }
 
   /**
    * 現在画面幅がSPかどうかのGetter
    */
-  public isSp() {
+  get isSp():boolean {
     return !this.desktop;
   }
 }
