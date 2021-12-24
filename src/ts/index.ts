@@ -4,6 +4,7 @@ import SampleClass from './models/SampleClass';
 import ExtendedClass from './models/ExtendedClass';
 import { enableJQuery } from './vendors/enableJQuery';
 import Viewport from './utilities/viewport';
+import UserAgent from './utilities/userAgent';
 
 const viewport = new Viewport();
 console.log(viewport);
@@ -16,5 +17,7 @@ console.log(viewport);
 //
 // const ext = new ExtendedClass(456);
 // console.log(ext);
+const ua = new UserAgent();
+$('header h1').text(`browser: ${ua.browser} os: ${ua.os}`);
 //
 // console.log(process.env.API_HOST);
