@@ -9,17 +9,42 @@ const apiInstance: AxiosInstance = axios.create({
   ...API_CONFIG,
 });
 
+class Response {
+  private readonly _status: number;
+  private readonly _data: string | [] | Record<string, unknown>;
+
+  constructor(res: {
+    status: number;
+    data: string | [] | Record<string, unknown>;
+  }) {
+    this._status = res.status;
+    this._data = res.data;
+  }
+
+  get code(): number {
+    return this._status;
+  }
+
+  get success(): boolean {
+    return this._status === 200;
+  }
+
+  get data() {
+    return this._data;
+  }
+}
+
 /**
  * Request Interceptors
  * リクエスト前に介入する処理を記述
  */
 apiInstance.interceptors.request.use(
   (request: AxiosRequestConfig) => {
-    console.log('[API] request', request);
+    console.log('[API] Request:', request);
     return request;
   },
   (error) => {
-    console.error('[API] request error:', error);
+    console.error('[API] Request', error);
     return Promise.reject(error);
   }
 );
@@ -30,11 +55,11 @@ apiInstance.interceptors.request.use(
  */
 apiInstance.interceptors.response.use(
   (response) => {
-    console.log('[API] response:', response);
-    return response.data;
+    console.log('[API] Response:', response);
+    return response;
   },
   (error) => {
-    console.error('[API] request error:', error);
+    console.error('[API] Response', error);
     return Promise.reject(error);
   }
 );
@@ -57,12 +82,13 @@ export default abstract class {
    * @param params
    * @private
    */
-  private request(
+  private async request(
     method: 'post' | 'get' | 'put' | 'patch' | 'delete',
     host: string,
     params: { params: null | Record<string, unknown> }
   ) {
-    return apiInstance[method](this.host + host, params);
+    const res = await apiInstance[method](this.host + host, params);
+    return new Response(res);
   }
 
   /**
@@ -70,7 +96,7 @@ export default abstract class {
    * @param endpoint
    * @param params
    */
-  _get(endpoint: string, params: null | Record<string, unknown>) {
+  protected _get(endpoint: string, params: null | Record<string, unknown>) {
     return this.request('get', endpoint, { params: params });
   }
 
@@ -79,7 +105,10 @@ export default abstract class {
    * @param endpoint
    * @param params
    */
-  _post(endpoint: string, params: { params: null | Record<string, unknown> }) {
+  protected _post(
+    endpoint: string,
+    params: { params: null | Record<string, unknown> }
+  ) {
     return this.request('post', endpoint, params);
   }
 
@@ -88,7 +117,10 @@ export default abstract class {
    * @param endpoint
    * @param params
    */
-  _put(endpoint: string, params: { params: null | Record<string, unknown> }) {
+  protected _put(
+    endpoint: string,
+    params: { params: null | Record<string, unknown> }
+  ) {
     return this.request('put', endpoint, params);
   }
 
@@ -97,7 +129,10 @@ export default abstract class {
    * @param endpoint
    * @param params
    */
-  _patch(endpoint: string, params: { params: null | Record<string, unknown> }) {
+  protected _patch(
+    endpoint: string,
+    params: { params: null | Record<string, unknown> }
+  ) {
     return this.request('patch', endpoint, params);
   }
 
@@ -106,7 +141,10 @@ export default abstract class {
    * @param endpoint
    * @param params
    */
-  _delete(endpoint: string, params: { params: null | Record<string, unknown> }) {
+  protected _delete(
+    endpoint: string,
+    params: { params: null | Record<string, unknown> }
+  ) {
     return this.request('delete', endpoint, params);
   }
 }
