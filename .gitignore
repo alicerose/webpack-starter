@@ -50,5 +50,6 @@ Thumbs.db
 
 # Project
 .data
+.env
 .env.*
 !.env.example

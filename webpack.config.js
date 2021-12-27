@@ -137,6 +137,7 @@ const app = {
       path    : path.resolve(__dirname, `.env.${environment}`),
       safe    : false,
       defaults: false,
+      expand  : true,
     }),
     new MiniCssExtractPlugin({
       // 抽出する CSS のファイル名
