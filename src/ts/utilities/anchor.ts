@@ -1,3 +1,5 @@
+import AnchorUtilClass from '../models/AnchorUtilClass';
+
 export const AnchorLink = {
   startTime     : 0,
   startPositionY: 0,
@@ -17,7 +19,8 @@ export const AnchorLink = {
     });
   },
   /**
-   *
+   * 移動先IDが存在するかの判定
+   * 移動先が存在しなかったら0（＝トップ）を返す
    */
   detect(e: Event) {
     e.preventDefault();
@@ -25,31 +28,18 @@ export const AnchorLink = {
     const hash = ele.hash;
     const target = document.getElementById(hash.replace('#', ''));
     if (!target) {
-      AnchorLink.prepare(0);
+      AnchorLink.execute(0);
       return;
     }
     const pos = target.getBoundingClientRect();
-    AnchorLink.prepare(pos.top + document.documentElement.scrollTop);
+    AnchorLink.execute(pos.top + document.documentElement.scrollTop);
   },
-  prepare(position: number) {
-    // window.scrollTo({
-    //   top     : position,
-    //   behavior: 'smooth'
-    // });
-    console.log('scroll to:', position);
-    this.startPositionY = document.documentElement.scrollTop;
-    this.endPositionY = position;
-    this.startTime = Date.now();
-    this.execute();
-  },
-  execute() {
-    const diff = Date.now() - AnchorLink.startTime;
-    const progress = Math.min(1, diff / AnchorLink.duration);
-    const scrollY = (AnchorLink.startPositionY) * (1 - AnchorLink.easeOutCubic(progress)) + AnchorLink.endPositionY;
-    window.scrollTo(0, scrollY);
-    if (progress < 1) requestAnimationFrame(AnchorLink.execute);
-  },
-  easeOutCubic: (x: number) => {
-    return 1 - Math.pow(1 - x, 4);
+  /**
+   * インスタンスを生成して移動開始
+   * @param position
+   */
+  execute(position: number) {
+    const anchor = new AnchorUtilClass(position);
+    anchor.run();
   },
 };
