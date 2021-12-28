@@ -4,6 +4,7 @@ import { enableJQuery } from './vendors/enableJQuery';
 import Viewport from './utilities/viewport';
 import UserAgent from './utilities/userAgent';
 import SampleApiClass from './models/SampleApiClass';
+import { AnchorLink } from './utilities/anchor';
 
 console.log(new Viewport());
 
@@ -12,6 +13,8 @@ $('header h1').text(`browser: ${ua.browser} os: ${ua.os}`);
 
 enableJQuery.init();
 console.log('jQuery:', $.fn.jquery);
+
+AnchorLink.init();
 
 const sampleApi = new SampleApiClass(process.env.API_HOST ?? '', '/posts');
 sampleApi
