@@ -4,7 +4,7 @@ interface Window {
 declare let window: Window;
 
 export const enableJQuery = {
-  init : () => {
+  init: () => {
     /**
      * ファイル外からjQueryを参照出来るようにする
      * @type {function(*=): *}
@@ -13,4 +13,4 @@ export const enableJQuery = {
   },
 };
 
-/// <reference path="node_modules/@types/jquery/dist/jquery.slim.d.ts" />
+/// <reference path="node_modules/@types/jquery/JQuery.d.ts" />

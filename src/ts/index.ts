@@ -1,16 +1,30 @@
 import '@/scss/common.scss';
 // import 'core-js';
-import SampleClass from './models/SampleClass';
-import ExtendedClass from './models/ExtendedClass';
 import { enableJQuery } from './vendors/enableJQuery';
+import Viewport from './utilities/viewport';
+import UserAgent from './utilities/userAgent';
+import SampleApiClass from './models/SampleApiClass';
+import { AnchorLink } from './utilities/anchor';
+
+console.log(new Viewport());
+
+const ua = new UserAgent();
+$('header h1').text(`browser: ${ua.browser} os: ${ua.os}`);
 
 enableJQuery.init();
-console.log(`jQuery: ${$.fn.jquery}`);
+console.log('jQuery:', $.fn.jquery);
 
-const cls = new SampleClass(123);
-console.log(cls);
+AnchorLink.init();
 
-const ext = new ExtendedClass(456);
-console.log(ext);
-
-console.log(process.env.API_HOST);
+const sampleApi = new SampleApiClass(process.env.API_HOST ?? '', '/posts');
+sampleApi
+  .getPosts()
+  .then((res) => {
+    console.log(res);
+    console.log(res.data);
+    console.log(res.code);
+    console.log(res.success);
+  })
+  .catch(() => {
+    console.log('Error');
+  });
