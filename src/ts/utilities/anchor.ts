@@ -1,11 +1,6 @@
 import AnchorUtilClass from '../models/AnchorUtilClass';
 
 export const AnchorLink = {
-  startTime     : 0,
-  startPositionY: 0,
-  endPositionY  : 0,
-  progress      : 0,
-  duration      : 300,
   /**
    * 初期化
    */
