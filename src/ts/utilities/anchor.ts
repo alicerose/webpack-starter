@@ -10,10 +10,10 @@ export const AnchorLink = {
    * 初期化
    */
   init() {
-    const elements = document.querySelectorAll('a');
+    const elements:NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[href^=\'#\']');
+    console.log(elements);
     elements.forEach((element: HTMLAnchorElement) => {
-      const hash = element.hash;
-      if (hash.indexOf('#') === 0) {
+      if (element.hash.indexOf('#') === 0) {
         element.addEventListener('click', this.detect, false);
       }
     });
