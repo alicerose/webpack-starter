@@ -31,7 +31,7 @@ export default class AnchorClass {
     const distance = this.moveTo - this.moveFrom;
     const moveToY = this.moveFrom + distance * easing.outQuart(progress);
     window.scrollTo(0, moveToY);
-    console.log('progress:', progress, 'To:', moveToY);
+    console.log('[Anchor] progress:', progress, 'to:', moveToY);
 
     if (progress < 1) {
       this.id = requestAnimationFrame(() => {

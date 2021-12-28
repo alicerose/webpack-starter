@@ -1,16 +1,9 @@
 <nav>
     <ul>
+        <% for(let i = 1;i < 10;i++) { %>
         <li>
-            <a href="#section1">1</a>
+            <a href="#section<%= i %>"><%= i %></a>
         </li>
-        <li>
-            <a href="#section2">2</a>
-        </li>
-        <li>
-            <a href="#section3">3</a>
-        </li>
-        <li>
-            <a href="#section4">4</a>
-        </li>
+        <% } %>
     </ul>
 </nav>
