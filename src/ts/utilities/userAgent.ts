@@ -1,24 +1,29 @@
 import { browsers } from 'ts/types/browsers';
 import { os } from 'ts/types/os';
 
-export default class UserAgent {
+export const UserAgent = {
+  init() {
+    console.log(new UserAgentClass());
+  }
+};
 
-  private readonly raw: string;
-  private readonly _browser: browsers | unknown;
-  private readonly _os: os | unknown;
+class UserAgentClass {
+  readonly browser: browsers | unknown;
+  readonly os: os | unknown;
 
   constructor() {
-    this.raw = window.navigator.userAgent;
-    this._browser = this.detectBrowser();
-    this._os = this.detectOS();
+    const ua = window.navigator.userAgent;
+    this.browser = this.detectBrowser(ua);
+    this.os = this.detectOS(ua);
   }
 
   /**
    * ブラウザの判定
+   * @param ua
    * @private
    */
-  private detectBrowser() {
-    const agent = this.raw.toLowerCase();
+  private detectBrowser(ua:string) {
+    const agent = ua.toLowerCase();
 
     if((agent.indexOf('chrome') > -1) && (agent.indexOf('edg') === -1) && (agent.indexOf('opr') === -1)){
       return 'chrome';
@@ -53,11 +58,12 @@ export default class UserAgent {
 
   /**
    * OSの判定
+   * @param ua
    * @private
    */
-  private detectOS() {
+  private detectOS(ua:string) {
 
-    const agent = this.raw.toLowerCase();
+    const agent = ua.toLowerCase();
 
     if((agent.indexOf('mac os x') > -1)){
       return 'Mac OS';
@@ -78,60 +84,52 @@ export default class UserAgent {
     return 'other';
   }
 
-  get browser() {
-    return this._browser;
-  }
-
-  get os() {
-    return this._os;
-  }
-
   /**
    * Chrome
    */
-  public isChrome() {
-    return this._browser === 'chrome';
+  get isChrome() {
+    return this.browser === 'chrome';
   }
 
   /**
    * Safari
    */
-  public isSafari() {
-    return this._browser === 'safari';
+  get isSafari() {
+    return this.browser === 'safari';
   }
 
   /**
    * Internet Explorer 11
    */
-  public isIE11() {
-    return this._browser === 'ie11';
+  get isIE11() {
+    return this.browser === 'ie11';
   }
 
   /**
    * Microsoft Edge(new)
    */
-  public isEdge() {
-    return this._browser === 'edge';
+  get isEdge() {
+    return this.browser === 'edge';
   }
 
   /**
    * FireFox
    */
-  public isFireFox() {
-    return this._browser === 'firefox';
+  get isFireFox() {
+    return this.browser === 'firefox';
   }
 
   /**
    * Opera
    */
-  public isOpera() {
-    return this._browser === 'opera';
+  get isOpera() {
+    return this.browser === 'opera';
   }
 
   /**
    * Other
    */
-  public isOtherBrowser() {
-    return this._browser === 'other';
+  get isOtherBrowser() {
+    return this.browser === 'other';
   }
 }

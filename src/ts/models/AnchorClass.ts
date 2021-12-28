@@ -1,7 +1,7 @@
 import { ANCHOR_DURATION } from '../constants';
 import { easing } from '../vendors/easing';
 
-export default class AnchorUtilClass {
+export default class AnchorClass {
   moveFrom: number;
   moveTo: number;
   progress: number;
