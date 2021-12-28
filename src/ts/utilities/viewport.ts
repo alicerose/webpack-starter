@@ -77,7 +77,7 @@ class ViewportClass {
    * @private
    */
   private screenSizeModified() {
-    console.log('[Viewport]', this.getScreenSize());
+    console.log('[Viewport]', this.screenSize);
     this.vhFix();
   }
 
@@ -97,10 +97,11 @@ class ViewportClass {
   /**
    * 画面幅の取得Getter
    */
-  public getScreenSize() {
+  get screenSize() {
     return {
-      width : this.width,
-      height: this.height
+      width  : this.width,
+      height : this.height,
+      desktop: this.desktop
     };
   }
 
