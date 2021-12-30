@@ -3,8 +3,8 @@
  */
 
 export const TextScrambler = {
-  init() {
-    const target = document.querySelectorAll('[data-text-scramble]');
+  init(selector = 'h1') {
+    const target = document.querySelectorAll(selector);
     target.forEach((element) => {
       if (element.textContent && element.textContent.length) {
         this.exec(element);
