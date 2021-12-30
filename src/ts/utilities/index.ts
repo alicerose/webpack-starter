@@ -2,6 +2,7 @@ import { Viewport } from './viewport';
 import { AnchorLink } from './anchor';
 import { UserAgent } from './userAgent';
 import { EnableJQuery } from '../vendors/EnableJQuery';
+import { TextScrambler } from './textScrambler';
 
 export const Utilities = {
   init() {
@@ -16,8 +17,9 @@ export const Utilities = {
   global() {
     AnchorLink.init();
     EnableJQuery.init();
-    Viewport.init();
+    TextScrambler.init();
     UserAgent.init();
+    Viewport.init();
   },
   /**
    * 個別ページ専用のスクリプトを記述
