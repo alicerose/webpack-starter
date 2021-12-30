@@ -3,6 +3,10 @@
  */
 
 export const TextScrambler = {
+  /**
+   * 初期化
+   * @param selector 対象とするセレクタ
+   */
   init(selector = 'h1') {
     const target = document.querySelectorAll(selector);
     target.forEach((element) => {
@@ -11,6 +15,10 @@ export const TextScrambler = {
       }
     });
   },
+  /**
+   * textContentが存在していたら実行
+   * @param element
+   */
   exec(element: Element) {
     if (!element.textContent) return;
     const scrambler = new TextScramblerClass(element);
