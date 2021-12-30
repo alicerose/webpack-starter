@@ -70,7 +70,8 @@ const app = {
             },
           },
           {
-            loader: 'ejs-plain-loader',
+            loader : 'ejs-html-loader',
+            options: configs.html.variables
           },
         ],
       },

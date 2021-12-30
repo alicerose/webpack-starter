@@ -33,7 +33,8 @@ brew install webp
 |`images.bundleImages`| 画像をjs内にbase64でバンドルするかどうか① | `true`で閾値（②）以下の画像をバンドルする            |
 |`images.bundleSizeLimit`| 何バイトまでの画像をバンドルするか②        | ①がtrueのときのみ有効 単位はbyte数（5*1024なら5kb） |
 |`images.assetName`| 書き出すファイル名のフォーマット          | 命名規則を指定する                           |
-|`html.minify`| `production`ビルド時の圧縮設定| `true`で圧縮する（デフォルトで`false`）            |
+|`html.minify`| `production`ビルド時の圧縮設定| `true`で圧縮する（デフォルトで`false`）          |
+|`html.variables`|ejsに渡す変数定義| 変数編集後は要再起動                          |
 
 ## envファイル
 
