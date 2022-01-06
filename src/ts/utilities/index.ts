@@ -2,7 +2,7 @@ import { Viewport } from './viewport';
 import { AnchorLink } from './anchor';
 import { UserAgent } from './userAgent';
 import { EnableJQuery } from '../vendors/EnableJQuery';
-import { TextScrambler } from './textScrambler';
+import { ScrollDetector } from './scrollDetector';
 
 export const Utilities = {
   init() {
@@ -17,7 +17,7 @@ export const Utilities = {
   global() {
     AnchorLink.init();
     EnableJQuery.init();
-    TextScrambler.init();
+    ScrollDetector.init();
     UserAgent.init();
     Viewport.init();
   },
