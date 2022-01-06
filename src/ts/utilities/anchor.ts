@@ -1,4 +1,4 @@
-import AnchorUtilClass from '../models/AnchorUtilClass';
+import AnchorClass from '../models/AnchorClass';
 
 export const AnchorLink = {
   /**
@@ -6,7 +6,6 @@ export const AnchorLink = {
    */
   init() {
     const elements:NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[href^=\'#\']');
-    console.log(elements);
     elements.forEach((element: HTMLAnchorElement) => {
       if (element.hash.indexOf('#') === 0) {
         element.addEventListener('click', this.detect, false);
@@ -34,7 +33,7 @@ export const AnchorLink = {
    * @param position
    */
   execute(position: number) {
-    const anchor = new AnchorUtilClass(position);
+    const anchor = new AnchorClass(position);
     anchor.run();
   },
 };

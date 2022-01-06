@@ -1,9 +1,15 @@
 import { BREAKPOINT } from '../constants';
 
+export const Viewport = {
+  init() {
+    console.log(new ViewportClass());
+  }
+};
+
 /**
  * Viewport関連を扱うクラス
  */
-export default class Viewport {
+class ViewportClass {
 
   private width: number;
   private height: number;
@@ -15,7 +21,6 @@ export default class Viewport {
     this.desktop = window.innerWidth > BREAKPOINT;
     this.watch();
     this.vhFix();
-    console.log('[Viewport] Breakpoint:', BREAKPOINT);
   }
 
   /**
@@ -47,14 +52,6 @@ export default class Viewport {
     });
   }
 
-  /**
-   * 画面サイズが変わった時に常時実行する処理を登録する
-   * @private
-   */
-  private screenSizeModified() {
-    console.log('[Viewport]', this.getScreenSize());
-    this.vhFix();
-  }
 
   /**
    * 画面幅変更時にブレイクポイントを跨いだ時のみ実行する処理を登録する
@@ -70,9 +67,18 @@ export default class Viewport {
 
     if(!wasPC && isPC) {
       // SP -> PCになったときの処理
-     console.log('[Viewport] SP -> PC');
+      console.log('[Viewport] SP -> PC');
     }
 
+  }
+
+  /**
+   * 画面サイズが変わった時に常時実行する処理を登録する
+   * @private
+   */
+  private screenSizeModified() {
+    console.log('[Viewport]', this.screenSize);
+    this.vhFix();
   }
 
   /**
@@ -91,10 +97,11 @@ export default class Viewport {
   /**
    * 画面幅の取得Getter
    */
-  public getScreenSize() {
+  get screenSize() {
     return {
-      width : this.width,
-      height: this.height
+      width  : this.width,
+      height : this.height,
+      desktop: this.desktop
     };
   }
 

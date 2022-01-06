@@ -10,18 +10,18 @@
 <body>
 <%- include('./modules/_header'); %>
 <main id="wrapper">
-    <div id="section1" style="height:200vh;background:#eee;">
+    <% for(let i = 1;i < anchors ;i++) { %>
+    <%
+        function randomColor() {
+          return Math.floor(Math.random() * 255);
+        }
+        const color_code = `rgb(${randomColor()},${randomColor()},${randomColor()})`;
+    %>
+    <div id="section<%= i %>" style="height:200vh;background:<%= color_code; %>;">
         <%- include('./modules/_anchors'); %>
+        <h2>section<%= i %></h2>
     </div>
-    <div id="section2" style="height:200vh;background:#ccc;">
-        <%- include('./modules/_anchors'); %>
-    </div>
-    <div id="section3" style="height:200vh;background:#aaa;">
-        <%- include('./modules/_anchors'); %>
-    </div>
-    <div id="section4" style="height:200vh;background:#888;">
-        <%- include('./modules/_anchors'); %>
-    </div>
+    <% } %>
 </main>
 </body>
 </html>

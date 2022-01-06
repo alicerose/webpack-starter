@@ -1,7 +1,7 @@
 import { ANCHOR_DURATION } from '../constants';
 import { easing } from '../vendors/easing';
 
-export default class AnchorUtilClass {
+export default class AnchorClass {
   moveFrom: number;
   moveTo: number;
   progress: number;
@@ -31,7 +31,7 @@ export default class AnchorUtilClass {
     const distance = this.moveTo - this.moveFrom;
     const moveToY = this.moveFrom + distance * easing.outQuart(progress);
     window.scrollTo(0, moveToY);
-    console.log('progress:', progress, 'To:', moveToY);
+    console.log('[Anchor] progress:', progress, 'to:', moveToY);
 
     if (progress < 1) {
       this.id = requestAnimationFrame(() => {

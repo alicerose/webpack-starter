@@ -26,8 +26,12 @@ module.exports = {
   },
   html: {
     // ハッシュ化するか
-    hash  : true,
+    hash     : true,
     // htmlを圧縮して出力するか
-    minify: false,
+    minify   : false,
+    // ejsに渡す変数
+    variables: {
+      anchors: 30
+    },
   },
 };
