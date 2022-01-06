@@ -1,16 +1,19 @@
 import '@/scss/common.scss';
+import { Utilities } from './utilities';
 // import 'core-js';
-import SampleClass from './models/SampleClass';
-import ExtendedClass from './models/ExtendedClass';
-import { enableJQuery } from './vendors/enableJQuery';
+// import SampleApiClass from './models/SampleApiClass';
 
-enableJQuery.init();
-console.log(`jQuery: ${$.fn.jquery}`);
-
-const cls = new SampleClass(123);
-console.log(cls);
-
-const ext = new ExtendedClass(456);
-console.log(ext);
-
-console.log(process.env.API_HOST);
+Utilities.init();
+//
+// const sampleApi = new SampleApiClass(process.env.API_HOST ?? '', '/posts');
+// sampleApi
+//   .getPosts()
+//   .then((res) => {
+//     console.log(res);
+//     console.log(res.data);
+//     console.log(res.code);
+//     console.log(res.success);
+//   })
+//   .catch(() => {
+//     console.log('Error');
+//   });

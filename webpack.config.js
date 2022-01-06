@@ -7,6 +7,7 @@ const Dotenv = require('dotenv-webpack');
 const configs = require('./project.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const environment = process.env.NODE_ENV || 'local';
@@ -69,7 +70,8 @@ const app = {
             },
           },
           {
-            loader: 'ejs-plain-loader',
+            loader : 'ejs-html-loader',
+            options: configs.html.variables
           },
         ],
       },
@@ -121,8 +123,11 @@ const app = {
   },
 
   devServer: {
-    watchFiles: [`${configs.directories.src}/ejs/**/*.ejs`, `${configs.directories.src}/ejs/**/_*.ejs`],
-    static    : {
+    watchFiles: [
+      `${configs.directories.src}/ejs/**/*.ejs`,
+      `${configs.directories.src}/ejs/**/_*.ejs`,
+    ],
+    static: {
       directory: path.join(__dirname, 'public'),
     },
     ...configs.server,
@@ -133,6 +138,7 @@ const app = {
       path    : path.resolve(__dirname, `.env.${environment}`),
       safe    : false,
       defaults: false,
+      expand  : true,
     }),
     new MiniCssExtractPlugin({
       // 抽出する CSS のファイル名
@@ -141,10 +147,16 @@ const app = {
     // new BundleAnalyzerPlugin({
     //   analyzerPort: 'auto',
     // }),
+    new webpack.ProvidePlugin({
+      '$'            : 'jquery',
+      'jQuery'       : 'jquery',
+      'window.jQuery': 'jquery',
+    }),
   ],
 
   optimization: {
-    minimizer: [
+    usedExports: true,
+    minimizer  : [
       new TerserPlugin({
         parallel     : true,
         terserOptions: {
@@ -159,10 +171,10 @@ const app = {
           test   : /node_modules/,
           name   : 'vendor',
           chunks : 'initial',
-          enforce: true
-        }
-      }
-    }
+          enforce: true,
+        },
+      },
+    },
   },
 };
 
@@ -179,8 +191,10 @@ const addEjsTemplates = () => {
       .replace('.ejs', '.html');
     app.plugins.push(
       new HtmlWebpackPlugin({
-        filename: `${fileName}`,
+        // inject  : 'head',
+        // scriptLoading: 'defer',
         template: template,
+        filename: `${fileName}`,
         ...configs.html,
       })
     );
@@ -193,13 +207,17 @@ module.exports = (env, argv) => {
   if (argv.mode !== 'production' && !isProduction) app.devtool = 'source-map';
 
   const patterns = [
-    { from: 'public/common', to: path.join(__dirname, configs.directories.dist), },
-    { from: `public/${argv.mode ?? 'development'}`, to: path.join(__dirname, configs.directories.dist), },
+    {
+      from: 'public/common',
+      to  : path.join(__dirname, configs.directories.dist),
+    },
+    {
+      from: `public/${argv.mode ?? 'development'}`,
+      to  : path.join(__dirname, configs.directories.dist),
+    },
   ];
 
-  app.plugins.push(
-    new CopyPlugin({ patterns }),
-  );
+  app.plugins.push(new CopyPlugin({ patterns }));
 
   return app;
 };
