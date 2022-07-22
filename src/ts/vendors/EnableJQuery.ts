@@ -10,7 +10,7 @@ export const EnableJQuery = {
      * @type {function(*=): *}
      */
     const $ = (window.$ = require('jquery'));
-    console.log('jQuery:', $.fn.jquery);
+    console.log('[jQuery]', $.fn.jquery);
   },
 };
 
