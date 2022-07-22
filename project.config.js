@@ -15,7 +15,7 @@ module.exports = {
     plugins: [['autoprefixer', { grid: true }],flexBugFixes()],
   },
   images: {
-    // 画像の
+    // 画像をバンドルするか
     bundleImages: true,
 
     // 一定サイズ以下のファイルはバンドルする場合
@@ -26,11 +26,19 @@ module.exports = {
   },
   html: {
     // ハッシュ化するか
-    hash     : true,
+    hash         : true,
+    // コンパイルしたアセットの読み込みをどこで行うか
+    inject       : true, // true || 'head' || 'body' || false
+    // scriptの読み込み属性
+    scriptLoading: 'defer', // 'blocking' || 'defer' || 'module'
     // htmlを圧縮して出力するか
-    minify   : false,
+    // 明示的にfalseにしない場合production時はtrueになる
+    minify       : false,
+    // アセット類のパス指定
+    // ルートパスの場合は "/" を指定する
+    publicPath   : 'auto', // 'auto' || String
     // ejsに渡す変数
-    variables: {
+    variables    : {
       anchors: 30
     },
   },
