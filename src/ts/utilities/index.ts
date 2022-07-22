@@ -10,10 +10,6 @@ enum AssetType {
 }
 
 export const Utilities = {
-  init() {
-    const body: HTMLBodyElement = document.getElementsByTagName('body')[0];
-    if (body.dataset.page) this.individual(body.dataset.page);
-  },
   /**
    * 共通ユーティリティ関数郡
    */
@@ -24,8 +20,8 @@ export const Utilities = {
    * 共通ユーティリティ関数郡（DOM構築後）
    */
   domLoaded() {
-    this.loadStaticAsset(AssetType.JS, '/assets/js/static.js');
-    this.loadStaticAsset(AssetType.CSS, '/assets/css/static.css');
+    // do something
+    this.individual();
   },
   /**
    * 共通ユーティリティ関数郡（読み込み完了後）
@@ -57,11 +53,17 @@ export const Utilities = {
   /**
    * 個別ページ専用のスクリプトを記述
    * bodyタグのdata-page属性の値に応じたスクリプトを実行する
-   * @param id
    */
-  individual(id: string) {
-    if (id === 'index') {
-      console.log('[Util] index page function');
+  individual() {
+    const body: HTMLBodyElement = document.getElementsByTagName('body')[0];
+    if (!body.dataset.page) return;
+
+    const id = body.dataset.page;
+    console.log('[Utilities] individual function target:', id);
+
+    if(id === 'script') {
+      this.loadStaticAsset(AssetType.JS, '/assets/js/static.js');
+      this.loadStaticAsset(AssetType.CSS, '/assets/css/static.css');
     }
   },
 };
