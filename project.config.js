@@ -15,7 +15,7 @@ module.exports = {
     plugins: [['autoprefixer', { grid: true }],flexBugFixes()],
   },
   images: {
-    // 画像の
+    // 画像をバンドルするか
     bundleImages: true,
 
     // 一定サイズ以下のファイルはバンドルする場合
