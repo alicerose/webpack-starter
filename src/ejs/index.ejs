@@ -1,20 +1,20 @@
 <!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <%- include('./_modules/_head'); %>
 </head>
 <body data-page="index">
-<%- include('./modules/_header'); %>
+<%- include('./_modules/_header'); %>
 <main id="wrapper">
 
 </main>
 <script>
+  // ここはエラーになる
+  console.log('jQuery called from browser:', $.fn.jquery);
+
   window.onload = () =>  {
-    // delete me
+    // 読み込みが完了してからの発火は問題ない
     console.log('jQuery called from browser:', $.fn.jquery);
   }
 </script>
