@@ -47,24 +47,33 @@ brew install webp
 
 ## npmコマンド
 
-|コマンド|用途| 備考                                     |
-|:---|:---|:---------------------------------------|
-|`dev`|開発環境の起動| `.env.local`を参照する                      |
-|`build:develop`|`development`環境ビルド| `clean`してから実行される `.env.develop`を参照する   |
-|`build:production`|`production`環境ビルド| `clean`してから実行される `.env.production`を参照する|
-|`clean`|`dist`を消去する||
-|`check-types`|tsファイルの型をチェックする||
-|`eslint`|lint実行| エラーチェックのみ                              |
-|`eslint:fix`|lint実行| 自動修正もする                                |
-|`format`|prettier実行| コードの整形をする                              |
-|`lint`|ファイルのLint処理| `eslint` `check-types`                 |
-|`lint:fix`|ファイルのLint処理| `eslint:fix` `check-types` `format`    |
-|`convert-webp`|WebP一括変換| `src/images`配下の画像を一括変換する               |
+| コマンド               | 用途                 | 備考                                      |
+|:-------------------|:-------------------|:----------------------------------------|
+| `dev`              | 開発環境の起動            | `.env.local`を参照する                       |
+| `build:develop`    | `development`環境ビルド | `clean`してから実行される `.env.develop`を参照する    |
+| `build:production` | `production`環境ビルド  | `clean`してから実行される `.env.production`を参照する |
+| `clean`            | `dist`を消去する        ||
+| `check-types`      | tsファイルの型をチェックする    ||
+| `eslint`           | lint実行             | エラーチェックのみ                               |
+| `eslint:fix`       | lint実行             | 自動修正もする                                 |
+| `format`           | prettier実行         | コードの整形をする                               |
+| `lint`             | ファイルのLint処理        | `eslint` `check-types`                  |
+| `lint:fix`         | ファイルのLint処理        | `eslint:fix` `check-types` `format`     |
+| `convert:webp`     | WebP一括変換           | `src/images`配下の画像を一括変換する                |
+| `beautify:html`    | HTML整形             | `dist`配下のhtmlのみ処理される                    |
 
 ### WebP一括変換
 
 `src/images`配下の`jpg`、`jpeg`, `png`を一括でWebPに変換します。
 変換したファイルは`${拡張子を含む元のファイル名}.webp`としてソースファイルと同一階層に出力されます。（拡張子違いで同一ファイル名があるとバッティングするため）
+
+### HTML整形
+
+* ejsのモジュール・コンポーネントを利用した構築では、インデントを意図通りに揃えるのが非常に困難です。
+* そのため、ビルド後のhtmlに対して整形をかけることで本番環境・納品時に整形し直したデータを作成出来るようにします。
+  * あくまでビルドした静的なhtmlファイルのみ対象にするため、devサーバ経由での閲覧時点ではインデントなどは元の状態のままです。
+* 整形ルールはeditorconfigに準じます。
+
 
 ## 備考・メモ
 

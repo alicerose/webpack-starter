@@ -13,7 +13,8 @@
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
     "lint": "npm-run-all eslint check-types",
     "lint:fix": "npm-run-all eslint:fix check-types format",
-    "convert-webp": "sh bin/convertWebP.sh"
+    "convert:webp": "sh bin/convertWebP.sh",
+    "beautify:html": "sh ./bin/beautify-html.sh"
   },
   "dependencies": {
     "@types/jquery": "^3.5.11",
@@ -54,6 +55,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "husky": "^7.0.4",
+    "js-beautify": "^1.14.4",
     "lint-staged": "^12.1.5",
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
