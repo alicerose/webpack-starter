@@ -1,6 +1,6 @@
 import { IntersectionObserverConfig } from '../types/IntersectionObserverConfig';
 
-export default class ScrollDetectClass {
+export default abstract class ScrollDetectClass {
   private readonly selector: string;
   private root: Element | Document | null | undefined;
   private rootMargin: string;
@@ -64,17 +64,16 @@ export default class ScrollDetectClass {
 
   /**
    * 交差時の挙動
+   * abstractなので継承時に要実装
    * @param entry
    */
-  public isIntersecting(entry: IntersectionObserverEntry) {
-    console.log('is intersecting!', entry);
-  }
+  abstract isIntersecting(entry: IntersectionObserverEntry): void;
 
   /**
    * 非交差時の挙動
+   * abstractなので継承時に要実装
    * @param entry
    */
-  public isNotIntersecting(entry: IntersectionObserverEntry) {
-    console.log('is not intersecting', entry);
-  }
+  abstract isNotIntersecting(entry: IntersectionObserverEntry): void;
+
 }
