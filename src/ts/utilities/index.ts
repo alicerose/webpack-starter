@@ -28,7 +28,6 @@ export const Utilities = {
    */
   onLoad() {
     AnchorLink.init();
-    ScrollDetector.init();
     UserAgent.init();
     Viewport.init();
   },
@@ -62,6 +61,7 @@ export const Utilities = {
     console.log('[Utilities] individual function target:', id);
 
     if(id === 'script') {
+      ScrollDetector.init();
       this.loadStaticAsset(AssetType.JS, '/assets/js/static.js');
       this.loadStaticAsset(AssetType.CSS, '/assets/css/static.css');
     }
