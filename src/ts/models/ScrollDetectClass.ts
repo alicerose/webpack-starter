@@ -2,7 +2,7 @@ import { IntersectionObserverConfig } from '../types/IntersectionObserverConfig'
 
 export default class ScrollDetectClass {
   private readonly selector: string;
-  private root: string | null;
+  private root: Element | Document | null | undefined;
   private rootMargin: string;
   private threshold: number | number[];
 

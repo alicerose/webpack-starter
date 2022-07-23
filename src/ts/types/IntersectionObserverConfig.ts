@@ -1,5 +1,5 @@
 export type IntersectionObserverConfig = {
-  root: string|null;
-  rootMargin:string;
-  threshold:number|number[];
+  root?: Element | Document | null | undefined;
+  rootMargin?:string;
+  threshold?:number|number[];
 }
