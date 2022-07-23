@@ -25,7 +25,11 @@ export default class ScrollDetectClass {
    */
   private watch() {
     // thisをbindしないとコールバックでthisが参照出来なくなる
-    const observer = new IntersectionObserver(this.callback.bind(this));
+    const observer = new IntersectionObserver(this.callback.bind(this), {
+      root      : this.root,
+      rootMargin: this.rootMargin,
+      threshold : this.threshold
+    });
 
     // 監視対象郡の取得
     const targets = document.querySelectorAll(this.selector);
