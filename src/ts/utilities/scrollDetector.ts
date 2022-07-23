@@ -1,36 +1,38 @@
-import { TextScrambler } from './textScrambler';
-
-/**
- * スクロールして描画領域内に入ったときの演出用基底関数
- * IntersectionObserverの名称がバッティングのため代替名で関数化
- */
 export const ScrollDetector = {
+  // スクロール時の監視設定
   config: {
-    // スクロール時の監視設定
     root      : null,
-    rootMargin: '-30% 0px',
-    threshold : 0,
+    rootMargin: '0% 0px',
+    threshold : 0.5
   },
-  init(selector = 'h1') {
-    const target = document.querySelectorAll(selector);
-    const observer = new IntersectionObserver(
-      this.detect,
-      this.config
-    );
-    target.forEach((element) => {
-      if (element.textContent && element.textContent.length) {
-        observer.observe(element);
-      }
+  // 監視対象要素
+  selector: 'main > *:not(.test-static)',
+  /**
+   * @todo 汎用性に乏しいのでmodel化してextendさせる
+   */
+  init() {
+    const observer = new IntersectionObserver(this.callback, this.config);
+
+    const targets = document.querySelectorAll(this.selector);
+    targets.forEach(target => {
+      observer.observe(target);
     });
   },
   /**
-   * 交差判定
-   * isIntersectingの正否で描画領域内の処理分岐
+   * 交差時のコールバック
    * @param entries
    */
-  detect(entries:IntersectionObserverEntry[]) {
+  callback(entries: IntersectionObserverEntry[]) {
     entries.forEach(entry => {
-      if(entry.isIntersecting) TextScrambler.exec(entry.target);
+      console.log(entry);
+      const status = entry.isIntersecting ? 'true' : 'false';
+      entry.target.textContent = 'is intersecting:' + status;
+      if(entry.isIntersecting) {
+        entry.target.classList.add('active');
+      } else {
+        entry.target.classList.remove('active');
+      }
+
     });
-  },
+  }
 };

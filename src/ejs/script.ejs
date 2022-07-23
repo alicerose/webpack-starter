@@ -3,6 +3,15 @@
 <head>
     <title>Document</title>
     <%- include('./_modules/_head'); %>
+    <style>
+        .spacer {
+          height:25vh;
+          transition: all 0.3s ease;
+        }
+        .active {
+          background-color: #ccc;
+        }
+    </style>
 </head>
 <body data-page="script">
 <%- include('./_modules/_header'); %>
@@ -10,6 +19,9 @@
     <div class="test-static">
         Text color changes when static style loaded.
     </div>
+    <% for(let i = 0;i<10;i++) { %>
+    <div class="spacer"></div>
+    <% } %>
 </main>
 <script>
   console.log('[Load] html script');
