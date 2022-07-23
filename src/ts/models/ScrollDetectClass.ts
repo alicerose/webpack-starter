@@ -15,7 +15,8 @@ export default abstract class ScrollDetectClass {
     this.selector = selector;
     this.root = config?.root ?? null;
     this.rootMargin = config?.rootMargin ?? '0% 0px';
-    this.threshold = config?.threshold ?? 0.5;
+    this.threshold = config?.threshold ?? 1;
+
     this.watch();
   }
 
