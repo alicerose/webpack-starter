@@ -31,12 +31,14 @@
     <% } %>
 </main>
 <script>
-  console.log('[Load] html script');
+  console.log('[Load] html script(1)');
 
   // jQueryの読み込みは共通アセット内で行われるので、ここはエラーになる
   console.log('jQuery called from browser:', $.fn.jquery);
 </script>
 <script>
+  console.log('[Load] html script(2)');
+
   // 静的アセットのスクリプトも読み込みがまだなのでエラーになる
   sample();
 </script>
