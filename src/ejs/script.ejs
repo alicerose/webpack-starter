@@ -7,6 +7,11 @@
         .spacer {
           height:25vh;
           transition: all 0.3s ease;
+          position: relative;
+        }
+        .spacer p {
+          position: sticky;
+          top: 0;
         }
         .active {
           background-color: #ccc;
@@ -20,7 +25,9 @@
         Text color changes when static style loaded.
     </div>
     <% for(let i = 0;i<30;i++) { %>
-    <div class="spacer" id="block<%= i %>">div</div>
+    <div class="spacer" id="block<%= i %>">
+        <p>div</p>
+    </div>
     <% } %>
 </main>
 <script>

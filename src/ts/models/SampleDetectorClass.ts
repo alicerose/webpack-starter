@@ -14,7 +14,7 @@ export default class SampleDetectorClass extends ScrollDetectClass {
    */
   isIntersecting(entry: IntersectionObserverEntry) {
     const status = entry.isIntersecting ? 'true' : 'false';
-    entry.target.textContent = 'is intersecting:' + status;
+    entry.target.childNodes[1].textContent = 'is intersecting:' + status;
     entry.target.classList.add('active');
 
     console.log(entry.target.id, entry.isIntersecting);
@@ -26,7 +26,7 @@ export default class SampleDetectorClass extends ScrollDetectClass {
    */
   isNotIntersecting(entry: IntersectionObserverEntry) {
     const status = entry.isIntersecting ? 'true' : 'false';
-    entry.target.textContent = 'is intersecting:' + status;
+    entry.target.childNodes[1].textContent = 'is intersecting:' + status;
     entry.target.classList.remove('active');
 
     console.log(entry.target.id, entry.isIntersecting);
