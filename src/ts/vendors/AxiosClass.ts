@@ -3,6 +3,7 @@ import { API_CONFIG } from '../constants/api';
 
 /**
  * AXIOSをどうにかする基底クラス
+ * @todo リファクタリングする
  */
 
 const apiInstance: AxiosInstance = axios.create({
