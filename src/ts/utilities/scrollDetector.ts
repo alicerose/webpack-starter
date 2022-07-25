@@ -1,4 +1,4 @@
-import SampleDetectorClass from '../models/SampleDetectorClass';
+import SampleDetectorClass from '../models/sample/SampleDetectorClass';
 
 export const ScrollDetector = {
   init() {

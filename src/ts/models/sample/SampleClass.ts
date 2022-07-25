@@ -1,4 +1,4 @@
-import SampleInterface from '../interfaces/SampleInterface';
+import SampleInterface from '../../interfaces/SampleInterface';
 
 export default class SampleClass implements SampleInterface {
   [key: string]: number;

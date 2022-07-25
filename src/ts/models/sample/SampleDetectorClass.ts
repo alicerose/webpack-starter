@@ -1,4 +1,4 @@
-import AbstractScrollDetectClass from './AbstractScrollDetectClass';
+import AbstractScrollDetectClass from '../AbstractScrollDetectClass';
 
 /**
  * @memo

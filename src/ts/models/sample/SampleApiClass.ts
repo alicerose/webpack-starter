@@ -1,4 +1,4 @@
-import AxiosClass from '../vendors/AxiosClass';
+import AxiosClass from '../../vendors/AxiosClass';
 
 export default class SampleApiClass extends AxiosClass {
   endpoint: string;
