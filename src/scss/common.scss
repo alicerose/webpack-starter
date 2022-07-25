@@ -1,3 +1,4 @@
+@use '@/scss/foundation/_global.scss' as g;
 // vendor
 //@use 'vendor/normalize';
 @use 'vendor/remedy';
@@ -16,6 +17,7 @@ header {
   position: sticky;
   top: 0;
   left: 0;
+  z-index: g.z(header);
   background: {
     color: rgba(#fff, 0.8);
   }
