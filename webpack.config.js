@@ -212,11 +212,11 @@ module.exports = (env, argv) => {
 
   const patterns = [
     {
-      from: 'public/common',
+      from: 'static/common',
       to  : path.join(__dirname, configs.directories.dist),
     },
     {
-      from: `public/${argv.mode ?? 'development'}`,
+      from: `static/${argv.mode ?? 'development'}`,
       to  : path.join(__dirname, configs.directories.dist),
     },
   ];
