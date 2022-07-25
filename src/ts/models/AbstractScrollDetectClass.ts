@@ -1,6 +1,6 @@
 import { IntersectionObserverConfig } from '../types/IntersectionObserverConfig';
 
-export default abstract class ScrollDetectClass {
+export default abstract class AbstractScrollDetectClass {
   private readonly selector: string;
   private root: Element | Document | null | undefined;
   private rootMargin: string;

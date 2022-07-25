@@ -1,4 +1,4 @@
-import ScrollDetectClass from './ScrollDetectClass';
+import AbstractScrollDetectClass from './AbstractScrollDetectClass';
 
 /**
  * @memo
@@ -6,7 +6,7 @@ import ScrollDetectClass from './ScrollDetectClass';
  * 最低限交差時・非交差時の挙動だけ実装すれば良い
  * この2つの関数はabstractで定義しているので継承先で実装しないとエラーを返す
  */
-export default class SampleDetectorClass extends ScrollDetectClass {
+export default class SampleDetectorClass extends AbstractScrollDetectClass {
 
   /**
    * 交差時の挙動
